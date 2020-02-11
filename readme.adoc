@@ -1,0 +1,3 @@
+= europe-food
+
+A small application showing OSM POI for food on two maps.
