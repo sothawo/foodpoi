@@ -1,8 +1,9 @@
+
 com:
   sothawo:
     foodpoi:
       elasticsearchHost: "localhost:9200"
-#      elasticsearchProxy: "localhost:8888"
+      elasticsearchProxy: "localhost:8080"
 
 logging.level:
   root: warn
