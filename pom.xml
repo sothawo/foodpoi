@@ -21,7 +21,7 @@
         <openjfx.version>11.0.2</openjfx.version>
         <elasticsearch.version>7.6.2</elasticsearch.version>
         <springdata.commons>2.3.4.RELEASE</springdata.commons>
-        <spring-data-elasticsearch>4.0.4.RELEASE</spring-data-elasticsearch>
+        <spring-data-elasticsearch>4.1.0-SNAPSHOT</spring-data-elasticsearch>
     </properties>
 
     <repositories>
