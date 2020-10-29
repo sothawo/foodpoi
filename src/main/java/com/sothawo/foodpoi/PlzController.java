@@ -9,11 +9,17 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.IndexOperations;
+import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.data.elasticsearch.core.geo.GeoJson;
+import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPolygon;
+import org.springframework.data.elasticsearch.core.query.Criteria;
+import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileInputStream;
@@ -58,6 +64,13 @@ public class PlzController {
                 .map(it -> new Plz(it.getProperties().getPlz(), it.getGeometry()))
                 .forEach(operations::save);
         }
+    }
+
+    @GetMapping("/location")
+    public SearchHits<Plz> areaAt(@RequestParam("lat") Double lat, @RequestParam("lon") Double lon) {
+        Query query = new CriteriaQuery(new Criteria("geometry").contains(GeoJsonPoint.of(lon, lat)));
+
+        return operations.search(query, Plz.class);
     }
 
     static class Feature {
